@@ -16,6 +16,6 @@ class Todo: Object {
     @objc dynamic var title: String = ""
     // nilを許容したくないから、?は取り除いた
     // 登録日時
-    @objc dynamic var created:Date = Date()
+    @objc dynamic var date:Date = Date()
     
 }

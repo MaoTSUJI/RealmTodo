@@ -29,11 +29,17 @@
                                 <rect key="frame" x="169" y="428" width="77" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="didClickButton:" destination="d60-G7-TEc" eventType="touchUpInside" id="toa-3G-5xd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="xxo-Rf-e79"/>
                     </view>
+                    <connections>
+                        <outlet property="textField" destination="m8m-BW-tcm" id="LoK-Oe-ed9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eja-7g-ODc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

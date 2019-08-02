@@ -7,7 +7,7 @@ target 'RalmTodo' do
 
   # Pods for RalmTodo
 
-pod 'RealmSwift'
+  pod 'RealmSwift'
 
 
 end

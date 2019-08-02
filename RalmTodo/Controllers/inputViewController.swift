@@ -12,11 +12,21 @@ import RealmSwift
 class inputViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var button: UIButton!
     
+    // 前の画面から渡されてきたTODOを受け取る変数
     var todo: Todo? = nil   // 新規で入ってきた場合は、中身はnil!!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if todo != nil {
+            button.setTitle("追加", for: .normal) // 各セルから押された時
+            textField.text = todo?.title    // Todoの型がそもそも?で指定しているから
+        }
+        
     }
     
     fileprivate func createNewTodo(_ text: String) {
@@ -30,12 +40,20 @@ class inputViewController: UIViewController {
         let id = getMaxId()
         
         todo.id = id
-        todo.title = text
+        todo.title = text   // 引数のtext
         todo.date = Date()
         
-        // 作成したTODOを登録する
+        // 作成したTODOを登録する    // こういう構文
         try! realm.write {
             realm.add(todo)
+        }
+    }
+    
+    fileprivate func updateTodo(_ text: String) {
+        // 更新
+        let realm = try! Realm()
+        try! realm.write {
+            todo?.title = text
         }
     }
     
@@ -66,8 +84,14 @@ class inputViewController: UIViewController {
             // ボタンがクリックされた時の処理を中断
             return
         }
-        // 新規タスクを追加
-        createNewTodo(text)
+        
+        if todo == nil {
+            // 新規タスクを追加 // 入力された文字列textをメソッドの引数に与える
+            createNewTodo(text)
+        } else {
+            updateTodo(text)
+        }
+        
         
         // NavifationControllerの持っている履歴から、1つ前の画面に戻る
         navigationController?.popViewController(animated: true)
@@ -89,6 +113,7 @@ class inputViewController: UIViewController {
             return 1
         } else {
             // 最大IDが存在する場合、最大ID + 1 を返す
+            // 新しい番号を与える
             return id! + 1
         }
     }

@@ -1,0 +1,23 @@
+import UIKit
+
+class InputViewController: UIViewController {
+
+    @IBOutlet weak var textField: UITextField!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+    @IBAction func didClickButton(_ sender: UIButton) {
+        // インデントを意識する
+        print();
+    }
+
+    // クラスの中に関数は作れるけど、関数の中に関数は作れない
+    func createNewTodo() {
+
+    }
+
+}
+
+変数名、関数名：小文字始まり

@@ -21,12 +21,14 @@ class ViewController: UIViewController {
         let realm  = try! Realm()
         // Todoの一覧を取得する
         todos = realm.objects(Todo.self).reversed()
+        // テーブルを更新する
         tableView.reloadData()
     }
     
     // 画面が初めて表示された1回だけしか実行されない
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         tableView.delegate = self
         tableView.dataSource = self
@@ -59,7 +61,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         let todo = todos[indexPath.row]
-        cell.textLabel?.text = todo.title
+        cell.textLabel?.text = todo.title   // todoにはid,title,dataを持ってる
         
         // 各セルに矢印を返せる
         cell.accessoryType = .disclosureIndicator

@@ -84,10 +84,27 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         if segue.identifier == "toNext" {
             // 次の画面のControllerを取得
             let inputVC = segue.destination as! inputViewController
-            
             // 次の画面に選択されたTodoを設定
             inputVC.todo = sender as? Todo
         }
     }
+    // スワイプしたらDELETEボタンが出現される！
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        // Realmから対象のTodoを削除
+        let todo = todos[indexPath.row]
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(todo)
+        }
+        // 配列todosから対象のTodoを削除
+        todos.remove(at: indexPath.row)
+        // 画面から対象のTodoを削除
+        tableView.deleteRows(at:[indexPath], with: .fade)
+        
+    }
+    
+    
+    
 }
 
